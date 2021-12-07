@@ -1,0 +1,18 @@
+<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
+	pageEncoding="ISO-8859-1"%>
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="ISO-8859-1">
+<title>Basic Java HTML</title>
+</head>
+<body>
+	<form action="ServLetLogin" method="post">
+		<input name="login" type="text"> 
+		<input name="senha" type="password">
+		<input type="submit" value="enviar">
+	</form>
+	
+	<h4> ${msg}</h4>
+</body>
+</html>

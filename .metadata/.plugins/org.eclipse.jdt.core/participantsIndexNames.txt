@@ -1,0 +1,7 @@
+INDEX VERSION 1.131
+C:\Users\danil\Documents\Google Drive - Danilo Estudo1\Java\JavaEE\.metadata\.plugins\org.eclipse.jst.jsp.core\jspsearch\578528959.index
+\Basic_HTML\src\main\java
+C:\Users\danil\Documents\Google Drive - Danilo Estudo1\Java\JavaEE\.metadata\.plugins\org.eclipse.jst.jsp.core\jspsearch\3512769172.index
+\Basic_HTML\src\main\java
+C:\Users\danil\Documents\Google Drive - Danilo Estudo1\Java\JavaEE\.metadata\.plugins\org.eclipse.jst.jsp.core\jspsearch\3343915236.index
+\Basic_HTML\src\main\java
