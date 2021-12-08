@@ -1,0 +1,9 @@
+package connection;
+
+public class SingleConnectionDataBase {
+	private static String url= "jdbc:mysql://localhost:3306/java_ee";
+	private static String user="root";
+	private static String pass="root";
+
+	
+}

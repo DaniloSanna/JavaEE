@@ -1,0 +1,8 @@
+package connection;
+
+public class SingleConnectionDataBase {
+	private static String url, user, pass;
+	
+	
+	
+}
