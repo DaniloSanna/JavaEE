@@ -8,6 +8,7 @@
 </head>
 <body>
 	<form action="ServLetLogin" method="post">
+	<input type="hidden" value ="<%= request.getParameter("url") %>" name = "url">
 		<table border="0">
 			<tr>
 				<td>Login:</td>

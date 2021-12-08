@@ -10,17 +10,10 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import model.ModelLogin;
 
-/**
- * Servlet implementation class ServletLogin
- */
-
-@WebServlet("/ServLetLogin") // Mapeamento de URL
+@WebServlet(urlPatterns = { "/principal/ServLetLogin", "/ServLetLogin" }) // Mapeamento de URL
 public class ServLetLogin extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
-	/**
-	 * Default constructor.
-	 */
 	public ServLetLogin() {
 		// TODO Auto-generated constructor stub
 	}
@@ -36,29 +29,32 @@ public class ServLetLogin extends HttpServlet {
 
 		String login = request.getParameter("login");
 		String pass = request.getParameter("pass");
-		
-		
+		String url = request.getParameter("url");
+
 		if (login != null && !login.isEmpty() && pass != null && !pass.isEmpty()) {
 			ModelLogin modellogin = new ModelLogin();
 			modellogin.setLogin(login);
 			modellogin.setPass(pass);
-		
-			if(modellogin.getLogin().equalsIgnoreCase("a") & modellogin.getPass().equalsIgnoreCase("a")) {
-				
-				request.getSession().setAttribute("usuário", modellogin.getLogin());
-				RequestDispatcher redirecionar = request.getRequestDispatcher("principal/principal.jsp");
+
+			if (modellogin.getLogin().equalsIgnoreCase("a") && modellogin.getPass().equalsIgnoreCase("a")) {
+
+				request.getSession().setAttribute("login", modellogin.getLogin());
+
+				if (url == null || url.equals("null") || url.isEmpty()) {
+					url = "principal/principal.jsp";
+				}
+				RequestDispatcher redirecionar = request.getRequestDispatcher(url);
 				redirecionar.forward(request, response);
-				
-				
-			}else {
-				RequestDispatcher redirecionar = request.getRequestDispatcher("index.jsp");
-				request.setAttribute("msg", "Informe o login e senha corretamente!");
+
+			} else {
+				RequestDispatcher redirecionar = request.getRequestDispatcher("/index.jsp");
+				request.setAttribute("msg", "Login or password should be wrong!");
 				redirecionar.forward(request, response);
 			}
-		
+
 		} else {
 			RequestDispatcher redirecionar = request.getRequestDispatcher("index.jsp");
-			request.setAttribute("msg", "Informe o login e senha corretamente!");
+			request.setAttribute("msg", "Login or password should be wrong!");
 			redirecionar.forward(request, response);
 		}
 
