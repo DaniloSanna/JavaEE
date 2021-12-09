@@ -48,11 +48,13 @@ h4 {
 		<div class="col-md-6">
 			<label class="form-label">Login:</label> <input name="login"
 				type="text" class="form-control" required>
+			<div class="invalid-feedback">Provide a valid login</div>
 		</div>
 
 		<div class="col-md-6">
 			<label class="form-label">Password:</label> <input name="pass"
 				type="password" class="form-control" id="inputPassword4" required>
+			<div class="invalid-feedback">Provide a valid password.</div>
 		</div>
 
 		<button type="submit" class="btn btn-primary">Send</button>
