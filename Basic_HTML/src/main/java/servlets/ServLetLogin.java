@@ -40,8 +40,6 @@ public class ServLetLogin extends HttpServlet {
 				modelLogin.setLogin(login);
 				modelLogin.setPass(pass);
 				
-				System.out.println("-------------------------------------------");
-				System.out.println("DENTRO DO SERVLETLOGIN");
 				System.out.println(modelLogin.getLogin() + " - " + modelLogin.getPass());
 
 				

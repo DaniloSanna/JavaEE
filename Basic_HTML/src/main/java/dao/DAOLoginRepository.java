@@ -22,8 +22,6 @@ public class DAOLoginRepository {
 		statement.setString(1, modelLogin.getLogin());
 		statement.setString(2, modelLogin.getPass());
 		
-		System.out.println("-------------------------------------------");
-		System.out.println("DENTRO DO DAO");
 		System.out.println(modelLogin.getLogin() + " - " + modelLogin.getPass());
 		
 		ResultSet resultset = statement.executeQuery();
