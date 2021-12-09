@@ -4,7 +4,7 @@ import java.sql.Connection;
 import java.sql.DriverManager;
 
 public class SingleConnectionDataBase {
-	private static String url = "jdbc:mysql://localhost:3306/java_ee?autoReconnect=true";
+	private static String url = "jdbc:mysql://localhost:3306/java_ee?autoReconnect=true&useUnicode=yes";
 	private static String user = "root";
 	private static String pass = "root";
 	private static Connection connection = null;

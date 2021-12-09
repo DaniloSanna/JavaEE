@@ -1,0 +1,1 @@
+INSERT INTO `java_ee`.`modellogin` (`login`, `pass`) VALUES ('a', 'a');

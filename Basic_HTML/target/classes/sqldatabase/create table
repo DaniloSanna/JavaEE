@@ -1,0 +1,5 @@
+CREATE TABLE `java_ee`.`modellogin` (
+  `login` VARCHAR(200) NOT NULL,
+  `pass` VARCHAR(200) NULL,
+  PRIMARY KEY (`login`),
+  UNIQUE INDEX `login_UNIQUE` (`login` ASC) VISIBLE);
