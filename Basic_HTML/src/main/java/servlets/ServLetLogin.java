@@ -51,9 +51,6 @@ public class ServLetLogin extends HttpServlet {
 				modelLogin.setLogin(login);
 				modelLogin.setPass(pass);
 				
-				System.out.println(modelLogin.getLogin() + " - " + modelLogin.getPass());
-
-				
 				if (dAOLoginRepository.checkLoginAuthentication(modelLogin)) {
 
 					request.getSession().setAttribute("login", modelLogin.getLogin());
