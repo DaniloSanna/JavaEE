@@ -1,7 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
 	pageEncoding="ISO-8859-1"%>
 
-
 <div class="theme-loader">
 	<div class="loader-track">
 		<div class="preloader-wrapper">

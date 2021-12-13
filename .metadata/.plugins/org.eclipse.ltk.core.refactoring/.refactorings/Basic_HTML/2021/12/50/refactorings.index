@@ -1,3 +1,11 @@
 1638801625475	Move 'receber-nome.jsp' to 'webapp'
 1638838456741	Delete element
 1639077428025	Delete element
+1639145813324	Copy file
+1639145823881	Rename resource 'principal-page-base2.jsp'
+1639145848271	Copy file
+1639145983103	Rename resource 'user.jsp'
+1639146063703	Rename resource 'user-creation.jsp'
+1639176818726	Rename type 'ServLetLogin'
+1639177008343	Rename type 'ServletLogin'
+1639178091655	Rename compilation unit 'ServLetLogin.java'

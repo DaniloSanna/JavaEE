@@ -49,7 +49,7 @@ public class FilterAutenticacao implements Filter {
 			String urlParaAtutenticar = req.getServletPath();
 
 			// Validar se esta logado, caso não, direcione para tela de login.
-			if (usuarioLogado == null && !urlParaAtutenticar.contains("/principal/ServLetLogin")) {
+			if (usuarioLogado == null && !urlParaAtutenticar.contains("/principal/ServletLogin")) {
 
 				RequestDispatcher redireciona = request.getRequestDispatcher("/index.jsp?url=" + urlParaAtutenticar);
 				request.setAttribute("msg", "Please, login first");

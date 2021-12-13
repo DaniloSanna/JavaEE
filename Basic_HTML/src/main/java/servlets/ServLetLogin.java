@@ -11,12 +11,12 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import model.ModelLogin;
 
-@WebServlet(urlPatterns = { "/principal/ServLetLogin", "/ServLetLogin" }) // Mapeamento de URL
-public class ServLetLogin extends HttpServlet {
+@WebServlet(urlPatterns = { "/principal/ServletLogin"}) // Mapeamento de URL
+public class ServletLogin extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	private DAOLoginRepository dAOLoginRepository = new DAOLoginRepository();
 
-	public ServLetLogin() {
+	public ServletLogin() {
 		// TODO Auto-generated constructor stub
 	}
 

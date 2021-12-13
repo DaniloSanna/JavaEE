@@ -40,7 +40,7 @@ h4 {
 <body>
 	<h4>Curso JSP</h4>
 
-	<form action="ServLetLogin" method="post"
+	<form action="ServletLogin" method="post"
 		class="row g-3 needs-validation">
 		<input type="hidden" value="<%=request.getParameter("url")%>"
 			name="url">
