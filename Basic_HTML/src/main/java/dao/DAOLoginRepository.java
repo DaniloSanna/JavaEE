@@ -21,9 +21,6 @@ public class DAOLoginRepository {
 		PreparedStatement statement = connection.prepareStatement(sqlquery);
 		statement.setString(1, modelLogin.getLogin());
 		statement.setString(2, modelLogin.getPass());
-		
-		System.out.println(modelLogin.getLogin() + " - " + modelLogin.getPass());
-		
 		ResultSet resultset = statement.executeQuery();
 
 		if(resultset.next()) return true;

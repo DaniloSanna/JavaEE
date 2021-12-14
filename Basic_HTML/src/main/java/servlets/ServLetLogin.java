@@ -17,7 +17,6 @@ public class ServletLogin extends HttpServlet {
 	private DAOLoginRepository dAOLoginRepository = new DAOLoginRepository();
 
 	public ServletLogin() {
-		// TODO Auto-generated constructor stub
 	}
 
 	// Recebe os dados da URL em Parametros
@@ -47,9 +46,7 @@ public class ServletLogin extends HttpServlet {
 
 		try {
 			if (login != null && !login.isEmpty() && pass != null && !pass.isEmpty()) {
-				ModelLogin modelLogin = new ModelLogin();
-				modelLogin.setLogin(login);
-				modelLogin.setPass(pass);
+				ModelLogin modelLogin = new ModelLogin(login, pass);
 				
 				if (dAOLoginRepository.checkLoginAuthentication(modelLogin)) {
 

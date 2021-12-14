@@ -78,7 +78,6 @@ public class FilterAutenticacao implements Filter {
 		
 		//Se tudo funcionar.
 		try {
-			System.out.println("Tudo funcionou!");
 			connection.commit();
 		} catch (SQLException e) {
 			System.out.println("Commit Error:");
