@@ -73,6 +73,7 @@
 															</div>															
 															<button class="btn btn-primary waves-effect waves-light">Apply</button>
 														</form>
+														<span class="msg">${msg}</span>
 													</div>
 												</div>
 											</div>
