@@ -10,4 +10,5 @@
     <fullyQualifiedTypeName name="java.lang.Exception"/>
     <fullyQualifiedTypeName name="connection.SingleConnectionDataBase"/>
     <fullyQualifiedTypeName name="jakarta.servlet.RequestDispatcher"/>
+    <fullyQualifiedTypeName name="model.ModelLogin"/>
 </qualifiedTypeNameHistroy>
