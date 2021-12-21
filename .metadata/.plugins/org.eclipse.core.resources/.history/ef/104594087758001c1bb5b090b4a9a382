@@ -1,9 +1,0 @@
-package connection;
-
-public class SingleConnectionDataBase {
-	private static String url, user, pass;
-	url = "jdbc:mysql://localhost:3306/coursedeitel";
-	user="root";
-	password="root";
-	
-}

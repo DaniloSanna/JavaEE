@@ -45,35 +45,50 @@
 													<div class="card-block">
 														<h4 class="sub-title">User Registration</h4>
 
-														<form class="form-material" action="<%= request.getContextPath()%>/ServletUserController" method="post">
+														<form class="form-material"
+															action="<%=request.getContextPath()%>/ServletUserController"
+															method="post" id="formUser">
 															<div class="form-group form-default">
-																<input type="text" name="id" id="id" class="form-control" readonly="readonly" value="${modolLogin.id}"> 
-																<span class="form-bar"></span> 
-																<label class="float-label">ID *(read only)</label>
+
+																<input type="text" name="id" id="id"
+																	class="form-control" readonly="readonly"
+																	value="${information.id}"> <span
+																	class="form-bar"></span> <label class="float-label">ID
+																	*(read only)</label>
 															</div>
 															<div class="form-group form-default">
-																<input type="text" name="name" id="name" class="form-control" required="required" autocomplete="off" value="${information.name}"> 
-																<span class="form-bar"></span> 
-																<label class="float-label">Name</label>
+																<input type="text" name="name" id="name"
+																	class="form-control" required="required"
+																	autocomplete="off" value="${information.name}">
+																<span class="form-bar"></span> <label
+																	class="float-label">Name</label>
 															</div>
 															<div class="form-group form-default">
-																<input type="email" name="email" id="email" class="form-control" required="required" autocomplete="off" value="${information.email}"> 
-																<span	class="form-bar"></span> 
-																<label class="float-label">E-mail</label>
+																<input type="email" name="email" id="email"
+																	class="form-control" required="required"
+																	autocomplete="off" value="${information.email}">
+																<span class="form-bar"></span> <label
+																	class="float-label">E-mail</label>
 															</div>
 															<div class="form-group form-default">
-																<input type="password" name="login" id="login" class="form-control" required="required" autocomplete="off" value="${information.login}"> 
-																<span	class="form-bar"></span> 
-																<label class="float-label">Login</label>
+																<input type="text" name="login" id="login"
+																	class="form-control" required="required"
+																	autocomplete="off" value="${information.login}">
+																<span class="form-bar"></span> <label
+																	class="float-label">Login</label>
 															</div>
 															<div class="form-group form-default">
-																<input type="password" name="pass" id="pass" class="form-control" required="required" autocomplete="off" value="${information.pass}"> 
-																<span	class="form-bar"></span> 
-																<label class="float-label">Password</label>
-															</div>															
+																<input type="password" name="pass" id="pass"
+																	class="form-control" required="required"
+																	autocomplete="off" value="${information.pass}">
+																<span class="form-bar"></span> <label
+																	class="float-label">Password</label>
+															</div>
+															<button class="btn btn-primary waves-effect waves-light"
+																onclick="clearForm();" type="reset" value="clear">Clear</button>
 															<button class="btn btn-primary waves-effect waves-light">Apply</button>
 														</form>
-														<span class="msg">${msg}</span>
+														<span class="msg">${msg}</span> <span class="msg">${msg1}</span>
 													</div>
 												</div>
 											</div>
@@ -92,6 +107,13 @@
 
 
 	<jsp:include page="javascriptfile.jsp"></jsp:include>
+	
+	<script type="text/javascript">
+		function clearForm() {
+			alert("Clear");
+			document.getElementById("formUser").reset();
+		}
+	</script>
 </body>
 
 </html>

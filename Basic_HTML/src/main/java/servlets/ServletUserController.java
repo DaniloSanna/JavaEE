@@ -25,18 +25,28 @@ public class ServletUserController extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		try {
+			String msg = "User sussecefully created!";
 			ModelLogin modelLogin = new ModelLogin(
-					(request.getParameter("id") != null && !request.getParameter("id").isEmpty()
-							? Long.getLong(request.getParameter("id"))
-							: null),
-					request.getParameter("login"), request.getParameter("pass"), request.getParameter("email"),
+					(request.getParameter("id") != null && !request.getParameter("id").isEmpty() ? Long.parseLong(request.getParameter("id")) : null),
+					request.getParameter("login"), 
+					request.getParameter("pass"), 
+					request.getParameter("email"),
 					request.getParameter("name"));
 
-			daoUserRepository.recordUser(modelLogin);
+				if(daoUserRepository.checkCreatedLogin(modelLogin.getLogin()) && modelLogin.getId() == null) {
+					msg = "User alread created!";
+					modelLogin = daoUserRepository.searchUser(modelLogin.getLogin());
+				}else {
+					if(!modelLogin.isNew()) {
+						msg = "User sussecefully updated!";
+					}
+					modelLogin = daoUserRepository.recordUser(modelLogin);
+				}
 
-			request.setAttribute("information", modelLogin);
-			request.setAttribute("msg", "User sussecefully created!");
-			request.getRequestDispatcher("principal/user-registration.jsp").forward(request, response);
+				request.setAttribute("information", modelLogin);
+				request.setAttribute("msg", msg);
+				request.getRequestDispatcher("principal/user-registration.jsp").forward(request, response);
+			
 		} catch (Exception e) {
 			e.printStackTrace();
 			RequestDispatcher redirecionar = request.getRequestDispatcher("erro.jsp");

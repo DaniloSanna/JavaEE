@@ -1,8 +1,0 @@
-package connection;
-
-public class SingleConnectionDataBase {
-	private String url, user, pass;
-	
-	
-	
-}
