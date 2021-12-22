@@ -18,10 +18,8 @@ public class DaoUserRepository {
 	public ModelLogin recordUser(ModelLogin object) throws Exception {
 		String sql = "";
 		PreparedStatement ps = null;
-		boolean teste = object.isNew();
-		boolean teste1 = !object.isNew();
 
-		if (teste) {
+		if (object.isNew()) {
 			sql = "INSERT INTO modellogin (login, pass, name, email) VALUES (upper(?), ?, ?, ?)";
 			ps = connection.prepareStatement(sql);
 			ps.setString(1, object.getLogin());
@@ -42,14 +40,12 @@ public class DaoUserRepository {
 		connection.commit();
 
 		return this.searchUser(object.getLogin());
-
 	}
 
 	public ModelLogin searchUser(String login) throws Exception {
 		ModelLogin result = null;
 
 		String sql = "SELECT * FROM java_ee.modellogin WHERE login = upper('" + login + "')";
-
 		PreparedStatement ps = connection.prepareStatement(sql);
 		ResultSet rs = ps.executeQuery();
 
@@ -60,9 +56,8 @@ public class DaoUserRepository {
 		return result;
 	}
 
-	public boolean checkCreatedLogin(String login) throws Exception {
-		String sql = "SELECT IF(count(1) > 0, 'true', 'false') as 'exists' FROM java_ee.modellogin WHERE login = upper('"
-				+ login + "')";
+	public boolean checkCreatedUser(String login) throws Exception {
+		String sql = "SELECT IF(count(1) > 0, 'true', 'false') as 'exists' FROM java_ee.modellogin WHERE login = upper('" + login + "')";
 		PreparedStatement ps = connection.prepareStatement(sql);
 		ResultSet rs = ps.executeQuery();
 
@@ -70,4 +65,11 @@ public class DaoUserRepository {
 		return rs.getBoolean("exists");
 	}
 
+	public void deleteUser(Long id) throws Exception {
+		String sql = "DELETE FROM java_ee.modellogin WHERE id = '" + String.valueOf(id) + "'";
+		System.out.println(sql);
+		PreparedStatement ps = connection.prepareStatement(sql);
+		ps.executeUpdate();
+		connection.commit();
+	}
 }

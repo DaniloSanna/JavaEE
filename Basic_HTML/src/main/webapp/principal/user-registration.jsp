@@ -47,7 +47,8 @@
 														<h4 class="sub-title">User Registration</h4>
 														
 														<form class="form-material" action="<%=request.getContextPath()%>/ServletUserController" method="post" id="formUser">
-															
+														<input type="hidden" name="action" id="action" value="">
+														
 															<div class="form-group form-default form-static-label">
 																<input type="text" name="id" id="id" class="form-control" readonly="readonly" value="${information.id}">
 																	<span class="form-bar"></span> 
@@ -78,10 +79,12 @@
 																<label class="float-label">Password</label>
 															</div>
 															
-															<button class="btn btn-primary waves-effect waves-light" onclick="clearForm()"  value="clear">Clear</button>
-															<button class="btn btn-primary waves-effect waves-light">Apply</button>
+															<h6><span class="msg">${msg}</span> <span class="msg">${msg1}</span></h6>															
+															
+															<button class="btn btn-primary waves-effect waves-light" onclick="deleteUser()"  value="delete" type="button">Delete</button>
+															<button class="btn btn-primary waves-effect waves-light" onclick="clearForm()"  value="clear" type="button">Clear</button>
+															<button class="btn btn-primary waves-effect waves-light"  type="submit">Apply</button>
 														</form>
-														<span class="msg">${msg}</span> <span class="msg">${msg1}</span>
 													</div>
 												</div>
 											</div>
@@ -104,6 +107,14 @@
 	<script type="text/javascript">
 		function clearForm() {
 			document.getElementById("formUser").reset();
+		}
+	
+		function deleteUser(){
+			if(confirm("Do you really wanna delete this user?")){
+			    document.getElementById("action").value = 'delete';
+				document.getElementById("formUser").method = 'get';
+				document.getElementById("formUser").submit();
+			}
 		}
 	</script>
 </body>

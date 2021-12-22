@@ -20,6 +20,24 @@ public class ServletUserController extends HttpServlet {
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
+
+		try {
+			if (request.getParameter("action") != null && 
+					!request.getParameter("action").isEmpty() &&					 
+					request.getParameter("action").equalsIgnoreCase("delete")) {
+
+				daoUserRepository.deleteUser(Long.parseLong(request.getParameter("id")));
+				request.setAttribute("msg", "User sussecefully deleted!");
+				request.getRequestDispatcher("principal/user-registration.jsp").forward(request, response);
+			}else {
+				request.setAttribute("msg", "Deletion did not work as expected, check the information inserted!");
+				request.getRequestDispatcher("principal/user-registration.jsp").forward(request, response);
+			}
+
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+
 	}
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
@@ -27,26 +45,26 @@ public class ServletUserController extends HttpServlet {
 		try {
 			String msg = "User sussecefully created!";
 			ModelLogin modelLogin = new ModelLogin(
-					(request.getParameter("id") != null && !request.getParameter("id").isEmpty() ? Long.parseLong(request.getParameter("id")) : null),
-					request.getParameter("login"), 
-					request.getParameter("pass"), 
-					request.getParameter("email"),
+					(request.getParameter("id") != null && !request.getParameter("id").isEmpty()
+							? Long.parseLong(request.getParameter("id"))
+							: null),
+					request.getParameter("login"), request.getParameter("pass"), request.getParameter("email"),
 					request.getParameter("name"));
 
-				if(daoUserRepository.checkCreatedLogin(modelLogin.getLogin()) && modelLogin.getId() == null) {
-					msg = "User alread created!";
-					modelLogin = daoUserRepository.searchUser(modelLogin.getLogin());
-				}else {
-					if(!modelLogin.isNew()) {
-						msg = "User sussecefully updated!";
-					}
-					modelLogin = daoUserRepository.recordUser(modelLogin);
+			if (daoUserRepository.checkCreatedUser(modelLogin.getLogin()) && modelLogin.getId() == null) {
+				msg = "User alread created!";
+				modelLogin = daoUserRepository.searchUser(modelLogin.getLogin());
+			} else {
+				if (!modelLogin.isNew()) {
+					msg = "User sussecefully updated!";
 				}
+				modelLogin = daoUserRepository.recordUser(modelLogin);
+			}
 
-				request.setAttribute("information", modelLogin);
-				request.setAttribute("msg", msg);
-				request.getRequestDispatcher("principal/user-registration.jsp").forward(request, response);
-			
+			request.setAttribute("information", modelLogin);
+			request.setAttribute("msg", msg);
+			request.getRequestDispatcher("principal/user-registration.jsp").forward(request, response);
+
 		} catch (Exception e) {
 			e.printStackTrace();
 			RequestDispatcher redirecionar = request.getRequestDispatcher("erro.jsp");
