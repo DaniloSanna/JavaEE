@@ -67,7 +67,6 @@ public class DaoUserRepository {
 
 	public void deleteUser(Long id) throws Exception {
 		String sql = "DELETE FROM java_ee.modellogin WHERE id = '" + String.valueOf(id) + "'";
-		System.out.println(sql);
 		PreparedStatement ps = connection.prepareStatement(sql);
 		ps.executeUpdate();
 		connection.commit();

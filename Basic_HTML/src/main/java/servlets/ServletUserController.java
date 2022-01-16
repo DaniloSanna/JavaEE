@@ -21,21 +21,44 @@ public class ServletUserController extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 
+		/*
+		//Teste
+		System.out.println("-------------------Inico Teste-------------------");
+		System.out.println("INICIO DA SERVLET");
+		System.out.println("É Diferente de Nulo: " + (request.getParameter("acao") != null) );
+		System.out.println("É Diferente de Vazio: " + !request.getParameter("acao").isEmpty());
+		System.out.println("Valor de Action: " + request.getParameter("acao"));
+		System.out.println("Valor do ID: " + request.getParameter("id") );
+		System.out.println("-------------------Fim Teste-------------------");
+		*/
 		try {
-			if (request.getParameter("action") != null && 
-					!request.getParameter("action").isEmpty() &&					 
-					request.getParameter("action").equalsIgnoreCase("delete")) {
+			if (request.getParameter("acao") != null && 
+					!request.getParameter("acao").isEmpty() &&					 
+					request.getParameter("acao").equalsIgnoreCase("delete")) {
 
 				daoUserRepository.deleteUser(Long.parseLong(request.getParameter("id")));
 				request.setAttribute("msg", "User sussecefully deleted!");
 				request.getRequestDispatcher("principal/user-registration.jsp").forward(request, response);
-			}else {
-				request.setAttribute("msg", "Deletion did not work as expected, check the information inserted!");
+			
+			}else if (request.getParameter("acao") != null && 
+					!request.getParameter("acao").isEmpty() &&					 
+					request.getParameter("acao").equalsIgnoreCase("deleteajax")) {
+				
+				daoUserRepository.deleteUser(Long.parseLong(request.getParameter("id")));
+				 
+				response.getWriter().write("User sussecefully deleted!");
+						 }
+			else {
+				//request.setAttribute("msg", "Deletion did not work as expected, check the information inserted!");
 				request.getRequestDispatcher("principal/user-registration.jsp").forward(request, response);
 			}
 
+
 		} catch (Exception e) {
 			e.printStackTrace();
+			RequestDispatcher redirecionar = request.getRequestDispatcher("erro.jsp");
+			request.setAttribute("msg", e.getMessage());
+			redirecionar.forward(request, response);
 		}
 
 	}

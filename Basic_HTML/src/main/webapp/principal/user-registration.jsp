@@ -47,7 +47,7 @@
 														<h4 class="sub-title">User Registration</h4>
 														
 														<form class="form-material" action="<%=request.getContextPath()%>/ServletUserController" method="post" id="formUser">
-														<input type="hidden" name="action" id="action" value="">
+														<input type="hidden" name="acao" id="acao" value="">
 														
 															<div class="form-group form-default form-static-label">
 																<input type="text" name="id" id="id" class="form-control" readonly="readonly" value="${information.id}">
@@ -79,10 +79,10 @@
 																<label class="float-label">Password</label>
 															</div>
 															
-															<h6><span class="msg">${msg}</span> <span class="msg">${msg1}</span></h6>															
+															<h6><span class="msg" id="msg">${msg}</span></h6>															
 															
-															<button class="btn btn-primary waves-effect waves-light" onclick="deleteUser()"  value="delete" type="button">Delete</button>
-															<button class="btn btn-primary waves-effect waves-light" onclick="clearForm()"  value="clear" type="button">Clear</button>
+															<button class="btn btn-primary waves-effect waves-light" onclick="deleteUserByAjax()" type="button" >Delete</button>
+															<button class="btn btn-primary waves-effect waves-light" onclick="clearForm()"  type="button">Clear</button>
 															<button class="btn btn-primary waves-effect waves-light"  type="submit">Apply</button>
 														</form>
 													</div>
@@ -106,7 +106,16 @@
 
 	<script type="text/javascript">
 		function clearForm() {
+			
+			/*.Reset deixa de funcionar*/
 			document.getElementById("formUser").reset();
+			
+		    var elementos = document.getElementById("formUser").elements; 
+		    
+		    for (p = 0; p < elementos.length; p ++){
+			    elementos[p].value = '';
+		    }
+			
 		}
 	
 		function deleteUser(){
@@ -116,6 +125,36 @@
 				document.getElementById("formUser").submit();
 			}
 		}
+		
+		function deleteUserByAjax(){
+			
+			if (confirm("Do you really wanna delete this user?")){
+				
+				 $.ajax({
+				     
+				     method: "get",
+				     url : document.getElementById('formUser').action,
+				     data : "id=" + document.getElementById('id').value + '&acao=deleteajax',
+				     success: function (response) {
+					 
+				    	clearForm();
+					  alert(response);
+					  document.getElementById('msg').textContent = response;
+					  
+				     }
+				     
+				 }).fail(function(xhr, status, errorThrown){
+				    alert('Erro ao deletar usuário por id: ' + xhr.responseText);
+				 });
+				 
+				  
+			    }
+			
+			
+			
+		}
+		
+			
 	</script>
 </body>
 
