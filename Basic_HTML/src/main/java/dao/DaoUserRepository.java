@@ -3,6 +3,8 @@ package dao;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.util.ArrayList;
+import java.util.List;
 
 import connection.SingleConnectionDataBase;
 import model.ModelLogin;
@@ -40,6 +42,25 @@ public class DaoUserRepository {
 		connection.commit();
 
 		return this.searchUser(object.getLogin());
+	}
+
+
+	public List<ModelLogin> searchForName(String name) throws Exception{
+		
+		List<ModelLogin> retorno = new ArrayList<ModelLogin>();
+
+		String sql = "SELECT * FROM java_ee.modellogin WHERE name LIKE UPPER(?)";
+		PreparedStatement ps = connection.prepareStatement(sql);
+		ps.setString(1, "%" + name + "%");
+		
+		ResultSet rs = ps.executeQuery();
+		
+		while (rs.next()) {
+			retorno.add( new ModelLogin(rs.getLong("id"), rs.getString("login"), rs.getString("pass"),
+					rs.getString("email"), rs.getString("name")));
+		}
+		
+		return retorno;
 	}
 
 	public ModelLogin searchUser(String login) throws Exception {
