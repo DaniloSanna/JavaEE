@@ -59,11 +59,10 @@ public class ServletUserController extends HttpServlet {
 				
 				 List<ModelLogin>dataJsonUser = daoUserRepository.searchForName(request.getParameter("nameSearched"));
 				 dataJsonUser.forEach(e->System.out.println(e));
-					
+				 
 				ObjectMapper mapper = new ObjectMapper();
 				String json = mapper.writeValueAsString(dataJsonUser);
-				System.out.println(json);
-				//response.getWriter().write(json);
+				response.getWriter().write(json);
 				 
 						 }
 			else {

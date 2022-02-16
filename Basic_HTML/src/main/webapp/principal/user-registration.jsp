@@ -124,9 +124,8 @@
 			  <div class="input-group-append">
 			    <button class="btn btn-outline-success" type="button" onclick="searchForUser()">Search</button>
 			  </div>
-			
-      		<p class="msg1" id="msg1">${msg1}</p>
 		    </div>
+		    <div style="height: 300px;overflow: scroll;">
 		      <table class="table" id="tableUserList">
 				  <thead>
 					   <tr>
@@ -136,17 +135,17 @@
 					    </tr>
 				  </thead>
 				  <tbody>
+				  
 				  </tbody>
 				</table>
-      			
-      
-      
-      
-      
+      		</div>
+      		<span id="allResults"></span>
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-primary" data-dismiss="modal">Close</button>
       </div>
+      <hr class="line" />
+       <p class="msg1" id="msg1">${msg1}</p>
     </div>
   </div>
 </div>
@@ -168,12 +167,17 @@
 				     data : "nameSearched=" + document.getElementById("nameSearched").value + '&acao=searchForUser',
 				     success: function (response) {
 				    	 
-				    	 
-				    	 document.getElementById('msg').textContent = response;
-				    	 
+				    	 var json = JSON.parse(response);
+				    	 alert(json);
+						 $('#tableUserList > tbody > tr').remove();
+						for (var p=0 ; p < json.length ; p++){
+							 $('#tableUserList > tbody').append('<tr> <td>'+json[p].id+'</td> <td> '+json[p].name+'</td> <td><button type="button" class="btn btn-info">Ver</button></td></tr>');
+						}
+						document.getElementById('allResults').textContent = 'Resultados: ' + json.length;
 				     }
 				 }).fail(function(xhr, status, errorThrown){
 				    alert('Search Error by name: : ' + xhr.responseText);
+				    document.getElementById('msg1').textContent = xhr.responseText;
 				 });
 			    }
 		}
