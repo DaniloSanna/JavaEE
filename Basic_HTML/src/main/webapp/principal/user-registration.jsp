@@ -125,7 +125,6 @@
 			    <button class="btn btn-outline-success" type="button" onclick="searchForUser()">Search</button>
 			  </div>
 		    </div>
-		    <div style="height: 300px;overflow: scroll;">
 		      <table class="table" id="tableUserList">
 				  <thead>
 					   <tr>
@@ -138,7 +137,6 @@
 				  
 				  </tbody>
 				</table>
-      		</div>
       		<span id="allResults"></span>
       </div>
       <div class="modal-footer">
@@ -154,6 +152,12 @@
 
 	<script type="text/javascript">
 		
+	function selectEdit(id){
+		
+		window.location.href = 	document.getElementById('formUser').action
+		+ '?acao=selectEdit&id=' + id;
+	}
+	
 	function searchForUser(){
 			 
 			var nameSearch = document.getElementById("nameSearched").value;
@@ -168,10 +172,10 @@
 				     success: function (response) {
 				    	 
 				    	 var json = JSON.parse(response);
-				    	 alert(json);
+				    	 
 						 $('#tableUserList > tbody > tr').remove();
 						for (var p=0 ; p < json.length ; p++){
-							 $('#tableUserList > tbody').append('<tr> <td>'+json[p].id+'</td> <td> '+json[p].name+'</td> <td><button type="button" class="btn btn-info">Ver</button></td></tr>');
+							 $('#tableUserList > tbody').append('<tr> <td>'+json[p].id+'</td> <td> '+json[p].name+'</td> <td><button type="button" class="btn btn-info" onclick="selectEdit('+json[p].id+')">Select</button></td></tr>');
 						}
 						document.getElementById('allResults').textContent = 'Resultados: ' + json.length;
 				     }

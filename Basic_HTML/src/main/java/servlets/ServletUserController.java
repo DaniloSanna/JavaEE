@@ -65,6 +65,19 @@ public class ServletUserController extends HttpServlet {
 				response.getWriter().write(json);
 				 
 						 }
+			else if (request.getParameter("acao") != null && 
+					!request.getParameter("acao").isEmpty() &&					 
+					request.getParameter("acao").equalsIgnoreCase("selectEdit")) {
+				
+				ModelLogin queue = daoUserRepository.searchUserById(request.getParameter("id"));
+				
+
+				request.setAttribute("information", queue);
+				request.setAttribute("msg", "Record to Edition");
+				request.getRequestDispatcher("principal/user-registration.jsp").forward(request, response);
+				
+				
+			}
 			else {
 				//request.setAttribute("msg", "Deletion did not work as expected, check the information inserted!");
 				request.getRequestDispatcher("principal/user-registration.jsp").forward(request, response);
@@ -100,7 +113,6 @@ public class ServletUserController extends HttpServlet {
 				}
 				modelLogin = daoUserRepository.recordUser(modelLogin);
 			}
-
 			request.setAttribute("information", modelLogin);
 			request.setAttribute("msg", msg);
 			request.getRequestDispatcher("principal/user-registration.jsp").forward(request, response);
