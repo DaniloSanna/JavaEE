@@ -125,6 +125,7 @@
 			    <button class="btn btn-outline-success" type="button" onclick="searchForUser()">Search</button>
 			  </div>
 		    </div>
+			<div>
 		      <table class="table" id="tableUserList">
 				  <thead>
 					   <tr>
@@ -134,12 +135,12 @@
 					    </tr>
 				  </thead>
 				  <tbody>
-				  
 				  </tbody>
 				</table>
-      		<span id="allResults"></span>
+		</div>
       </div>
       <div class="modal-footer">
+      <span  id="amountUser"></span>
         <button type="button" class="btn btn-primary" data-dismiss="modal">Close</button>
       </div>
       <hr class="line" />
@@ -152,32 +153,27 @@
 
 	<script type="text/javascript">
 		
-	function selectEdit(id){
-		
-		window.location.href = 	document.getElementById('formUser').action
-		+ '?acao=selectEdit&id=' + id;
-	}
-	
 	function searchForUser(){
 			 
 			var nameSearch = document.getElementById("nameSearched").value;
-
 			if (nameSearch != null && nameSearch != '' && nameSearch.trim()!= ''){
 				
 			 $.ajax({
-				     
 				     method: "get",
 				     url : document.getElementById('formUser').action,
 				     data : "nameSearched=" + document.getElementById("nameSearched").value + '&acao=searchForUser',
 				     success: function (response) {
-				    	 
 				    	 var json = JSON.parse(response);
+				    	 $('#tableUserList > tbody > tr').remove();
+				    	 for (var p=0; p<json.length; p++){
+				    		 $('#tableUserList > tbody').append(
+				    		'<tr> <td>' + json[p].id + '</td>' +
+				    		 '<td>'+ json[p].name + '</td>' +
+				    		 '<td><button onclick="selectUser('+json[p].id+')" type="button" class="btn btn-info">Select</button></td>' +
+				    		 '</tr>');
+				    	 }
 				    	 
-						 $('#tableUserList > tbody > tr').remove();
-						for (var p=0 ; p < json.length ; p++){
-							 $('#tableUserList > tbody').append('<tr> <td>'+json[p].id+'</td> <td> '+json[p].name+'</td> <td><button type="button" class="btn btn-info" onclick="selectEdit('+json[p].id+')">Select</button></td></tr>');
-						}
-						document.getElementById('allResults').textContent = 'Resultados: ' + json.length;
+				    	 document.getElementById('amountUser').textContent = 'User´s Amount: ' + json.length;
 				     }
 				 }).fail(function(xhr, status, errorThrown){
 				    alert('Search Error by name: : ' + xhr.responseText);
@@ -186,7 +182,11 @@
 			    }
 		}
 	
-	
+	function selectUser (id) {
+		var urlAction = document.getElementById("formUser").action;
+		window.location.href = urlAction + '?acao=searchForSelected&id=' + id;
+		
+	}
 		function clearForm() {
 			
 			/*.Reset deixa de funcionar*/
@@ -200,6 +200,7 @@
 			
 		}
 	
+
 		function deleteUser(){
 			if(confirm("Do you really wanna delete this user?")){
 			    document.getElementById("action").value = 'delete';

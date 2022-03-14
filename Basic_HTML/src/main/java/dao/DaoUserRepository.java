@@ -63,6 +63,20 @@ public class DaoUserRepository {
 		return retorno;
 	}
 
+	public ModelLogin searchForId(Long id) throws Exception {
+		ModelLogin result = null;
+
+		String sql = "SELECT * FROM java_ee.modellogin WHERE id ='" + id + "'";
+		PreparedStatement ps = connection.prepareStatement(sql);
+		ResultSet rs = ps.executeQuery();
+
+		while (rs.next()) {
+			result = new ModelLogin(rs.getLong("id"), rs.getString("login"), rs.getString("pass"),
+					rs.getString("email"), rs.getString("name"));
+		}
+		return result;
+	}
+	
 	public ModelLogin searchUser(String login) throws Exception {
 		ModelLogin result = null;
 
@@ -75,22 +89,8 @@ public class DaoUserRepository {
 					rs.getString("email"), rs.getString("name"));
 		}
 		return result;
-	}	
-	public ModelLogin searchUserById(String id) throws Exception {
-		ModelLogin result = null;
-
-		String sql = "SELECT * FROM java_ee.modellogin WHERE id = ?";
-		PreparedStatement ps = connection.prepareStatement(sql);
-		ps.setLong(1, Long.parseLong(id));
-		ResultSet rs = ps.executeQuery();
-
-		while (rs.next()) {
-			result = new ModelLogin(rs.getLong("id"), rs.getString("login"), rs.getString("pass"),
-					rs.getString("email"), rs.getString("name"));
-		}
-		return result;
 	}
-
+	
 	public boolean checkCreatedUser(String login) throws Exception {
 		String sql = "SELECT IF(count(1) > 0, 'true', 'false') as 'exists' FROM java_ee.modellogin WHERE login = upper('" + login + "')";
 		PreparedStatement ps = connection.prepareStatement(sql);
