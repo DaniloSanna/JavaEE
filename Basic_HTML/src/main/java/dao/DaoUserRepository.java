@@ -48,7 +48,7 @@ public List<ModelLogin> searchForAll() throws Exception{
 		
 		List<ModelLogin> retorno = new ArrayList<ModelLogin>();
 
-		String sql = "SELECT * FROM java_ee.modellogin";
+		String sql = "SELECT * FROM java_ee.modellogin where useradmin is false";
 		PreparedStatement ps = connection.prepareStatement(sql);
 		ResultSet rs = ps.executeQuery();
 		
@@ -64,7 +64,7 @@ public List<ModelLogin> searchForAll() throws Exception{
 		
 		List<ModelLogin> retorno = new ArrayList<ModelLogin>();
 
-		String sql = "SELECT * FROM java_ee.modellogin WHERE name LIKE UPPER(?)";
+		String sql = "SELECT * FROM java_ee.modellogin WHERE name LIKE UPPER(?) AND useradmin is false";
 		PreparedStatement ps = connection.prepareStatement(sql);
 		ps.setString(1, "%" + name + "%");
 		
@@ -81,7 +81,7 @@ public List<ModelLogin> searchForAll() throws Exception{
 	public ModelLogin searchForId(Long id) throws Exception {
 		ModelLogin result = null;
 
-		String sql = "SELECT * FROM java_ee.modellogin WHERE id ='" + id + "'";
+		String sql = "SELECT * FROM java_ee.modellogin WHERE id ='" + id + "' AND useradmin is false";
 		PreparedStatement ps = connection.prepareStatement(sql);
 		ResultSet rs = ps.executeQuery();
 
@@ -95,7 +95,7 @@ public List<ModelLogin> searchForAll() throws Exception{
 	public ModelLogin searchUser(String login) throws Exception {
 		ModelLogin result = null;
 
-		String sql = "SELECT * FROM java_ee.modellogin WHERE login = upper('" + login + "')";
+		String sql = "SELECT * FROM java_ee.modellogin WHERE login = upper('" + login + "') AND useradmin is false";
 		PreparedStatement ps = connection.prepareStatement(sql);
 		ResultSet rs = ps.executeQuery();
 
@@ -116,7 +116,7 @@ public List<ModelLogin> searchForAll() throws Exception{
 	}
 
 	public void deleteUser(Long id) throws Exception {
-		String sql = "DELETE FROM java_ee.modellogin WHERE id = '" + String.valueOf(id) + "'";
+		String sql = "DELETE FROM java_ee.modellogin WHERE id = '" + String.valueOf(id) + "' AND useradmin is false";
 		PreparedStatement ps = connection.prepareStatement(sql);
 		ps.executeUpdate();
 		connection.commit();
