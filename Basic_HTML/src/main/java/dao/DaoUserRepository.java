@@ -44,6 +44,21 @@ public class DaoUserRepository {
 		return this.searchUser(object.getLogin());
 	}
 
+public List<ModelLogin> searchForAll() throws Exception{
+		
+		List<ModelLogin> retorno = new ArrayList<ModelLogin>();
+
+		String sql = "SELECT * FROM java_ee.modellogin";
+		PreparedStatement ps = connection.prepareStatement(sql);
+		ResultSet rs = ps.executeQuery();
+		
+		while (rs.next()) {
+			retorno.add( new ModelLogin(rs.getLong("id"), rs.getString("login"), rs.getString("pass"),
+					rs.getString("email"), rs.getString("name")));
+		}
+		
+		return retorno;
+	}
 
 	public List<ModelLogin> searchForName(String name) throws Exception{
 		

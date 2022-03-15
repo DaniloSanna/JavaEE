@@ -94,6 +94,28 @@
 											</div>
 										</div>
 									</div>
+									
+											<div>
+		      <table class="table"  id="informationAllView">
+				  <thead>
+					   <tr>
+						    <th scope="col">ID</th>
+						    <th scope="col">Name</th>
+						    <th scope="col">Check</th>
+					    </tr>
+				  </thead>
+				  <tbody>
+				  			<c:forEach items='${informationAll}' var="mL">
+				  						<tr>
+				  								<td> <c:out value='${mL.id }'></c:out> </td>
+				  								<td> <c:out value='${mL.name }'></c:out> </td>
+				  								<td><a  href="<%= request.getContextPath() %>/ServletUserController?acao=searchForSelected&id=${mL.id}"  type="button" class="btn btn-info">Select</a></td>
+				  						</tr>				  						
+				  			</c:forEach>
+				  </tbody>
+				</table>
+		</div>
+									
 									<!-- Page-body end -->
 								</div>
 								<div id="styleSelector"></div>
@@ -116,6 +138,31 @@
           <span aria-hidden="true">&times;</span>
         </button>
       </div>
+      	   <div>
+		      <table class=""  id="informationAllView">
+				  <thead>
+					   <tr>
+						    <th scope="col">ID</th>
+						    <th scope="col">Name</th>
+						    <th scope="col">Check</th>
+					    </tr>
+				  </thead>
+				  <tbody>
+				  			<c:forEach items='${informationAll}' var="mL">
+				  						<tr>
+				  								<td> <c:out value='${mL.id }'></c:out> </td>
+				  						</tr>
+				  						<tr>
+				  								<td> <c:out value='${mL.name }'></c:out> </td>
+				  						</tr>
+				  						<tr>
+				  								<td><button type="button" class="btn btn-info">Select</button></td>
+				  						</tr>				  						
+				  			</c:forEach>
+				  </tbody>
+				</table>
+		</div>
+      
       <div class="modal-body">
 <!-- Modal Body Content-->
 
@@ -144,10 +191,12 @@
         <button type="button" class="btn btn-primary" data-dismiss="modal">Close</button>
       </div>
       <hr class="line" />
-       <p class="msg1" id="msg1">${msg1}</p>
-    </div>
+         	 </div>
+	   <p class="msg1" id="msg1">${msg1}</p>
   </div>
 </div>
+
+
 
 	<jsp:include page="javascriptfile.jsp"></jsp:include>
 
