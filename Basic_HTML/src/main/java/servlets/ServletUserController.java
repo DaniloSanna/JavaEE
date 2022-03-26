@@ -16,7 +16,7 @@ import model.ModelLogin;
 import jakarta.servlet.annotation.WebServlet;
 
 //@WebServlet("/ServletUserController")
-public class ServletUserController extends HttpServlet {
+public class ServletUserController extends ServletUserGenericUtil {
 	private static final long serialVersionUID = 1L;
 
 	private DaoUserRepository daoUserRepository = new DaoUserRepository();
@@ -35,7 +35,7 @@ public class ServletUserController extends HttpServlet {
 				daoUserRepository.deleteUser(Long.parseLong(request.getParameter("id")));
 				request.setAttribute("msg", "User sussecefully deleted!");
 				
-				 List<ModelLogin> modelLogins = daoUserRepository.searchForAll();
+				 List<ModelLogin> modelLogins = daoUserRepository.searchForAll(super.getLoggedUser(request));
 				 request.setAttribute("informationAll", modelLogins);
 				
 				request.getRequestDispatcher("principal/user-registration.jsp").forward(request, response);
@@ -51,7 +51,7 @@ public class ServletUserController extends HttpServlet {
 					!request.getParameter("acao").isEmpty() &&					 
 					request.getParameter("acao").equalsIgnoreCase("searchForUser")) {
 				
-				 List<ModelLogin>dataJsonUser = daoUserRepository.searchForName(request.getParameter("nameSearched"));
+				 List<ModelLogin>dataJsonUser = daoUserRepository.searchForName(request.getParameter("nameSearched"),super.getLoggedUser(request));
 				// dataJsonUser.forEach(e->System.out.println(e));
 				 
 				ObjectMapper mapper = new ObjectMapper();
@@ -65,9 +65,9 @@ public class ServletUserController extends HttpServlet {
 					!request.getParameter("acao").isEmpty() &&					 
 					request.getParameter("acao").equalsIgnoreCase("searchForSelected")) {
 					
-				    ModelLogin modelLogin = daoUserRepository.searchForId(Long.parseLong(request.getParameter("id")));
+				    ModelLogin modelLogin = daoUserRepository.searchForId(Long.parseLong(request.getParameter("id")), super.getLoggedUser(request) );
 				 
-					 List<ModelLogin> modelLogins = daoUserRepository.searchForAll();
+					 List<ModelLogin> modelLogins = daoUserRepository.searchForAll(super.getLoggedUser(request));
 					 request.setAttribute("informationAll", modelLogins);
 					 
 				    request.setAttribute("msg", "Editing user");
@@ -80,7 +80,7 @@ public class ServletUserController extends HttpServlet {
 					!request.getParameter("acao").isEmpty() &&					 
 					request.getParameter("acao").equalsIgnoreCase("searchForAll")) {
 					
-				    List<ModelLogin> modelLogin = daoUserRepository.searchForAll();
+				    List<ModelLogin> modelLogin = daoUserRepository.searchForAll(super.getLoggedUser(request));
 				   // modelLogin.forEach(e->System.out.println(e));
 				    
 				    request.setAttribute("msg", "Loaded Users");
@@ -92,7 +92,7 @@ public class ServletUserController extends HttpServlet {
 			
 			else {
 				//request.setAttribute("msg", "Deletion did not work as expected, check the information inserted!");
-				 List<ModelLogin> modelLogin = daoUserRepository.searchForAll();
+				 List<ModelLogin> modelLogin = daoUserRepository.searchForAll(super.getLoggedUser(request));
 				 request.setAttribute("informationAll", modelLogin);
 				request.getRequestDispatcher("principal/user-registration.jsp").forward(request, response);
 			}
@@ -120,12 +120,12 @@ public class ServletUserController extends HttpServlet {
 
 			if (daoUserRepository.checkCreatedUser(modelLogin.getLogin()) && modelLogin.getId() == null) {
 				msg = "User alread created!";
-				modelLogin = daoUserRepository.searchUser(modelLogin.getLogin());
+				modelLogin = daoUserRepository.searchUser(modelLogin.getLogin().concat(msg), super.getLoggedUser(request));
 			} else {
 				if (!modelLogin.isNew()) {
 					msg = "User sussecefully updated!";
 				}
-				modelLogin = daoUserRepository.recordUser(modelLogin);
+				modelLogin = daoUserRepository.recordUser(modelLogin, super.getLoggedUser(request));
 			}
 
 			request.setAttribute("information", modelLogin);
