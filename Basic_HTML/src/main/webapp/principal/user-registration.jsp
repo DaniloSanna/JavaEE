@@ -66,6 +66,17 @@
 																<span class="form-bar"></span> 
 																<label class="float-label">E-mail</label>
 															</div>
+
+															<div class="form-group form-default form-static-label">
+																<select class="form-control" aria-label="Default select example" name="assignment" id="assignment">
+																	  <option selected disabled="disabled">[Select]</option>
+																	  <option value="ADMIN">ADMIN</option>
+																	  <option value="MANAGER">Manager</option>
+																	  <option value="SUPERVISOR">Supervisor</option>
+																</select>
+																<span class="form-bar"></span>
+																<label class="float-label">User´s Assignment:</label>
+															</div>
 															
 															<div class="form-group form-default form-static-label">
 																<input type="text" name="login" id="login" class="form-control" required="required" autocomplete="off" value="${information.login}">
@@ -78,7 +89,7 @@
 																<span class="form-bar"></span>
 																<label class="float-label">Password</label>
 															</div>
-															
+
 															<h6><span class="msg" id="msg">${msg}</span></h6>															
 															
 															<button class="btn btn-primary waves-effect waves-light"  type="submit">Apply</button>

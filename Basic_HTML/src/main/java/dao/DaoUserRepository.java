@@ -22,22 +22,25 @@ public class DaoUserRepository {
 		PreparedStatement ps = null;
 
 		if (object.isNew()) {
-			sql = "INSERT INTO modellogin (login, pass, name, email, record_by) VALUES (upper(?), ?, ?, ?, ?)";
+			sql = "INSERT INTO modellogin (login, pass, name, email, record_by, assignment) VALUES (upper(?), ?, ?, ?, ?, ?)";
 			ps = connection.prepareStatement(sql);
 			ps.setString(1, object.getLogin());
 			ps.setString(2, object.getPass());
 			ps.setString(3, object.getName());
 			ps.setString(4, object.getEmail());
 			ps.setLong(5, loggedUser);
+			ps.setString(6, object.getAssignment());
 			ps.execute();
 
 		}else {
-			sql = "UPDATE modellogin SET login=upper(?), pass=?, name=?, email=? WHERE id='"+object.getId() + "";
+			sql = "UPDATE modellogin SET login=upper(?), pass=?, name=?, email=?, assignment=? WHERE id='"+object.getId() + "'";
 			ps = connection.prepareStatement(sql);
 			ps.setString(1, object.getLogin());
 			ps.setString(2, object.getPass());
 			ps.setString(3, object.getName());
 			ps.setString(4, object.getEmail());
+			ps.setString(5, object.getAssignment());
+			
 			ps.executeUpdate();
 		}
 		connection.commit();
@@ -55,7 +58,7 @@ public List<ModelLogin> searchForAll(Long loggedUser) throws Exception{
 		
 		while (rs.next()) {
 			retorno.add( new ModelLogin(rs.getLong("id"), rs.getString("login"), rs.getString("pass"),
-					rs.getString("email"), rs.getString("name")));
+					rs.getString("email"), rs.getString("name"), rs.getString("assignment")));
 		}
 		
 		return retorno;
@@ -73,7 +76,7 @@ public List<ModelLogin> searchForAll(Long loggedUser) throws Exception{
 		
 		while (rs.next()) {
 			retorno.add( new ModelLogin(rs.getLong("id"), rs.getString("login"), rs.getString("pass"),
-					rs.getString("email"), rs.getString("name")));
+					rs.getString("email"), rs.getString("name"), rs.getString("assignment")));
 		}
 		
 		return retorno;
@@ -88,7 +91,7 @@ public List<ModelLogin> searchForAll(Long loggedUser) throws Exception{
 
 		while (rs.next()) {
 			result = new ModelLogin(rs.getLong("id"), rs.getString("login"), rs.getString("pass"),
-					rs.getString("email"), rs.getString("name"));
+					rs.getString("email"), rs.getString("name"), rs.getString("assignment"));
 		}
 		return result;
 	}
@@ -102,7 +105,7 @@ public List<ModelLogin> searchForAll(Long loggedUser) throws Exception{
 
 		while (rs.next()) {
 			result = new ModelLogin(rs.getLong("id"), rs.getString("login"), rs.getString("pass"),
-					rs.getString("email"), rs.getString("name"));
+					rs.getString("email"), rs.getString("name"), rs.getString("assignment"));
 		}
 		return result;
 	}
@@ -116,7 +119,7 @@ public List<ModelLogin> searchForAll(Long loggedUser) throws Exception{
 
 		while (rs.next()) {
 			result = new ModelLogin(rs.getLong("id"), rs.getString("login"), rs.getString("pass"),
-					rs.getString("email"), rs.getString("name"), rs.getBoolean("useradmin"));
+					rs.getString("email"), rs.getString("name"), rs.getBoolean("useradmin"), rs.getString("assignment"));
 		}
 		return result;
 	}

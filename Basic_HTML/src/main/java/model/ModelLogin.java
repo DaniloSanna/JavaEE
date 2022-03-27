@@ -11,6 +11,8 @@ public class ModelLogin implements Serializable{
 	private String email;
 	private String name;
 	private boolean useradmin;
+	private String assignment;
+	
 	
 	public boolean isNew() {
 		if (this.id == null) {
@@ -29,13 +31,14 @@ public class ModelLogin implements Serializable{
 		this.login = login;
 		this.pass = pass;
 	}
-	public ModelLogin(Long id, String login, String pass, String email, String name) {
+	public ModelLogin(Long id, String login, String pass, String email, String name, String assignment) {
 		super();
 		this.id = id;
 		this.login = login;
 		this.pass = pass;
 		this.email = email;
 		this.name = name;
+		this.assignment=assignment;
 	}
 
 	public ModelLogin(Long id, String login, String pass, String email, String name, boolean useradmin) {
@@ -47,7 +50,16 @@ public class ModelLogin implements Serializable{
 		this.name = name;
 		this.useradmin=useradmin;
 	}
-
+	public ModelLogin(Long id, String login, String pass, String email, String name, boolean useradmin, String assignment) {
+		super();
+		this.id = id;
+		this.login = login;
+		this.pass = pass;
+		this.email = email;
+		this.name = name;
+		this.useradmin=useradmin;
+		this.assignment=assignment;
+	}
 	
 	@Override
 	public String toString() {
@@ -78,8 +90,15 @@ public class ModelLogin implements Serializable{
 	public Boolean isAdmin() {
 	return useradmin;
 }
+	public String getAssignment() {
+		return assignment;
+	}
+
 	public void  setUserAdmin(boolean useradmin) {
 		this.useradmin=useradmin;
 }
+	public void  setAssignment(String assignment) {
+		this.assignment=assignment;
+}	
 	
 }

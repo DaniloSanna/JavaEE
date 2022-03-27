@@ -116,7 +116,7 @@ public class ServletUserController extends ServletUserGenericUtil {
 							? Long.parseLong(request.getParameter("id"))
 							: null),
 					request.getParameter("login"), request.getParameter("pass"), request.getParameter("email"),
-					request.getParameter("name"));
+					request.getParameter("name"), request.getParameter("assignment"));
 
 			if (daoUserRepository.checkCreatedUser(modelLogin.getLogin()) && modelLogin.getId() == null) {
 				msg = "User alread created!";
