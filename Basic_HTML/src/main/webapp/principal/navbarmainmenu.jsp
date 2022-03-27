@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
 	pageEncoding="ISO-8859-1"%>
+ <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
 <nav class="pcoded-navbar">
 	<div class="sidebar_toggle">
@@ -50,12 +51,17 @@
 					<span class="pcoded-mcaret"></span>
 				</a>
 				<ul class="pcoded-submenu">
-					<li class=" ">
-						<a href="<%=request.getContextPath() %>/ServletUserController?acao=searchForAll" class="waves-effect waves-dark">
-							<span class="pcoded-micon"><i class="ti-angle-right"></i></span> 
-							<span class="pcoded-mtext" data-i18n="nav.basic-components.alert">User Registration</span> <span class="pcoded-mcaret"></span>
-						</a>
-					</li>
+				
+					<c:if test="${isAdmin}">
+							<li class=" ">
+								<a href="<%=request.getContextPath() %>/ServletUserController?acao=searchForAll" class="waves-effect waves-dark">
+									<span class="pcoded-micon"><i class="ti-angle-right"></i></span> 
+									<span class="pcoded-mtext" data-i18n="nav.basic-components.alert">User Registration</span> <span class="pcoded-mcaret"></span>
+								</a>
+							</li>
+						</c:if>
+						
+					
 					<li class=" "><a href="breadcrumb.html"
 						class="waves-effect waves-dark"> <span class="pcoded-micon"><i
 								class="ti-angle-right"></i></span> <span class="pcoded-mtext"

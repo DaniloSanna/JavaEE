@@ -10,6 +10,7 @@ public class ModelLogin implements Serializable{
 	private String pass;
 	private String email;
 	private String name;
+	private boolean useradmin;
 	
 	public boolean isNew() {
 		if (this.id == null) {
@@ -36,6 +37,17 @@ public class ModelLogin implements Serializable{
 		this.email = email;
 		this.name = name;
 	}
+
+	public ModelLogin(Long id, String login, String pass, String email, String name, boolean useradmin) {
+		super();
+		this.id = id;
+		this.login = login;
+		this.pass = pass;
+		this.email = email;
+		this.name = name;
+		this.useradmin=useradmin;
+	}
+
 	
 	@Override
 	public String toString() {
@@ -63,5 +75,11 @@ public class ModelLogin implements Serializable{
 		return name;
 	}
 
+	public Boolean isAdmin() {
+	return useradmin;
+}
+	public void  setUserAdmin(boolean useradmin) {
+		this.useradmin=useradmin;
+}
 	
 }

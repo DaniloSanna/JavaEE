@@ -116,7 +116,7 @@ public List<ModelLogin> searchForAll(Long loggedUser) throws Exception{
 
 		while (rs.next()) {
 			result = new ModelLogin(rs.getLong("id"), rs.getString("login"), rs.getString("pass"),
-					rs.getString("email"), rs.getString("name"));
+					rs.getString("email"), rs.getString("name"), rs.getBoolean("useradmin"));
 		}
 		return result;
 	}

@@ -3,6 +3,7 @@ package servlets;
 import java.io.IOException;
 
 import dao.DAOLoginRepository;
+import dao.DaoUserRepository;
 import jakarta.servlet.RequestDispatcher;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
@@ -14,8 +15,10 @@ import model.ModelLogin;
 @WebServlet(urlPatterns = { "/principal/ServletLogin"}) // Mapeamento de URL
 public class ServletLogin extends HttpServlet {
 	private static final long serialVersionUID = 1L;
+	
 	private DAOLoginRepository dAOLoginRepository = new DAOLoginRepository();
-
+	private DaoUserRepository daoUserRepository = new DaoUserRepository();
+	
 	public ServletLogin() {
 	}
 
@@ -49,8 +52,11 @@ public class ServletLogin extends HttpServlet {
 				ModelLogin modelLogin = new ModelLogin(login, pass);
 				
 				if (dAOLoginRepository.checkLoginAuthentication(modelLogin)) {
-
+					
+					modelLogin = daoUserRepository.searchLoogedUser(login);
+					
 					request.getSession().setAttribute("login", modelLogin.getLogin());
+					request.getSession().setAttribute("isAdmin", modelLogin.isAdmin());
 
 					if (url == null || url.equals("null") || url.isEmpty()) {
 						url = "principal/principal.jsp";
